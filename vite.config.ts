@@ -16,7 +16,7 @@ function figmaAssetResolver() {
 }
 
 export default defineConfig({
-  base: '/paayalabhingri/', // <-- Add this line
+  base: '/paayalabhingri/',
 
   plugins: [
     figmaAssetResolver(),
@@ -31,5 +31,4 @@ export default defineConfig({
   },
 
   assetsInclude: ['**/*.svg', '**/*.csv'],
-}).csv'],
 })
