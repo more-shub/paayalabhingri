@@ -1,0 +1,37 @@
+/* Logo appearance helpers */
+.logo {
+	background: transparent;
+	display: inline-block;
+	width: auto;
+	height: auto;
+}
+
+/* Fallback visual tweaks when logo sits on pure white backgrounds.
+	 Use sparingly — mix-blend-mode can change how the image composites with background. */
+.logo--white-fallback {
+	mix-blend-mode: multiply;
+	filter: brightness(1.02) contrast(1.12);
+}
+
+/* Prominent header and subtle white-smoke behind logo */
+.site-header {
+	transition: background-color 0.25s ease, box-shadow 0.25s ease;
+	box-shadow: 0 6px 24px rgba(0,0,0,0.08);
+	color: #08130b; /* dark text for contrast on white glass */
+}
+
+.site-header a, .site-header button {
+	color: #08130b !important;
+}
+
+.logo-wrap {
+	background: rgba(255,255,255,0.92);
+	padding: 6px;
+	border-radius: 8px;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+}
+
+
