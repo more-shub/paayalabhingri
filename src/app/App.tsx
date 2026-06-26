@@ -187,7 +187,7 @@ function Nav() {
         <div className="max-w-7xl mx-auto px-5 sm:px-8 flex items-center justify-between h-16 md:h-18">
           <a href="#" className="flex items-center gap-3 min-w-0" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
             <span className="logo-wrap" aria-hidden>
-              <img src="/assets/Paayala_Bhingri_Transparent.png" alt="Paayala Bhingri logo" className="logo w-10 h-10 md:w-16 md:h-16 object-contain" style={{ backgroundColor: "transparent" }} />
+              <img src={`${import.meta.env.BASE_URL}assets/Paayala_Bhingri_Transparent.png`} alt="Paayala Bhingri logo" className="logo w-10 h-10 md:w-16 md:h-16 object-contain" style={{ backgroundColor: "transparent" }} />
             </span>
             <div className="min-w-0">
               <span className="text-[11px] sm:text-sm font-semibold block leading-tight truncate" style={{ color: G.dark, fontFamily: DISPLAY }}>Paayala Bhingri</span>
@@ -1073,7 +1073,7 @@ function Footer() {
         <div className="sm:col-span-2">
           <div className="flex items-center gap-3 mb-4">
             <div className="rounded-3xl bg-white p-2 flex items-center justify-center">
-              <img src="/assets/Paayala_Bhingri_Transparent.png" alt="Paayala Bhingri logo" className="w-15 h-15 rounded-2xl object-cover" />
+              <img src={`${import.meta.env.BASE_URL}assets/Paayala_Bhingri_Transparent.png`} alt="Paayala Bhingri logo" className="w-15 h-15 rounded-2xl object-cover" />
             </div>
             <div>
               <span className="font-mono text-xs tracking-[0.2em] uppercase block leading-tight" style={{ fontFamily: MONO, color: G.cream }}>Paayala Bhingri</span>
