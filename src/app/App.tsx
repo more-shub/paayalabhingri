@@ -248,7 +248,7 @@ function Hero() {
   return (
     <section ref={ref} id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       <motion.div className="absolute inset-0 scale-110" style={{ y: bgY }}>
-        <img src="https://images.unsplash.com/photo-1585889574476-af7bcb00d9c3?w=1920&h=1080&fit=crop&auto=format" alt="Raigad Fort green mountains under white clouds" className="w-full h-full object-cover" loading="eager" decoding="async" fetchPriority="high" />
+        <img src="https://images.unsplash.com/photo-1585889574476-af7bcb00d9c3?w=1920&h=1080&fit=crop&auto=format" alt="Raigad Fort green mountains under white clouds" className="w-full h-full object-cover object-right sm:object-center" loading="eager" decoding="async" fetchPriority="high" />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #08130b 0%, rgba(8,19,11,0.65) 40%, rgba(8,19,11,0.3) 100%)" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(8,19,11,0.7) 0%, transparent 60%)" }} />
       </motion.div>
