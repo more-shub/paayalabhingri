@@ -1116,29 +1116,137 @@ function Footer() {
   );
 }
 
+// ─── SPLASH SCREEN ───────────────────────────────────────────────────────────
+
+function SplashScreen({ onDone }: { onDone: () => void }) {
+  const [phase, setPhase] = useState<"in" | "hold" | "out">("in");
+
+  useEffect(() => {
+    // Phase timeline: scale-in (800ms) → hold (900ms) → fade-out (700ms)
+    const t1 = setTimeout(() => setPhase("hold"), 800);
+    const t2 = setTimeout(() => setPhase("out"), 1700);
+    const t3 = setTimeout(() => onDone(), 2400);
+    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+  }, [onDone]);
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-[9999] flex flex-col items-center justify-center"
+      style={{ backgroundColor: G.dark }}
+      animate={{ opacity: phase === "out" ? 0 : 1 }}
+      transition={{ duration: 0.7, ease: "easeInOut" }}
+    >
+      {/* Ambient glow rings */}
+      <motion.div
+        className="absolute rounded-full"
+        style={{ width: 320, height: 320, background: `radial-gradient(circle, ${G.forest}30 0%, transparent 70%)` }}
+        animate={{ scale: phase === "hold" ? [1, 1.15, 1] : 1, opacity: phase === "out" ? 0 : 0.8 }}
+        transition={{ duration: 1.2, repeat: phase === "hold" ? Infinity : 0, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute rounded-full"
+        style={{ width: 500, height: 500, background: `radial-gradient(circle, ${G.gold}12 0%, transparent 70%)` }}
+        animate={{ scale: phase === "hold" ? [1, 1.08, 1] : 1, opacity: phase === "out" ? 0 : 1 }}
+        transition={{ duration: 2, repeat: phase === "hold" ? Infinity : 0, ease: "easeInOut", delay: 0.3 }}
+      />
+
+      {/* Logo with white circle behind it */}
+      <motion.div
+        className="relative flex items-center justify-center"
+        initial={{ scale: 0.4, opacity: 0 }}
+        animate={{
+          scale: phase === "in" ? 1 : phase === "hold" ? [1, 1.04, 1] : 0.95,
+          opacity: phase === "out" ? 0 : 1,
+        }}
+        transition={{
+          scale: phase === "in"
+            ? { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
+            : phase === "hold"
+            ? { duration: 1.4, repeat: Infinity, ease: "easeInOut" }
+            : { duration: 0.5 },
+          opacity: { duration: phase === "in" ? 0.5 : 0.6 },
+        }}
+      >
+        {/* White circle background — only behind the logo */}
+        <div style={{
+          position: "absolute",
+          width: 180,
+          height: 180,
+          borderRadius: "50%",
+          backgroundColor: "#ffffff",
+          boxShadow: "0 0 40px 10px rgba(255,255,255,0.15)",
+        }} />
+        <img
+          src={`${import.meta.env.BASE_URL}assets/Paayala_Bhingri_Transparent.png`}
+          alt="Paayala Bhingri"
+          style={{ width: 150, height: 150, objectFit: "contain", position: "relative", zIndex: 1 }}
+        />
+      </motion.div>
+
+      {/* Brand name */}
+      <motion.div
+        className="mt-8 text-center"
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: phase === "out" ? 0 : 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.5 }}
+      >
+        <p className="text-2xl font-light tracking-wider" style={{ fontFamily: DISPLAY, color: G.cream }}>
+          Paayala Bhingri
+        </p>
+        <p className="text-[10px] font-mono tracking-[0.4em] uppercase mt-1" style={{ fontFamily: MONO, color: G.gold }}>
+          From Exploring पायवाटो To Experiencing Peaks
+        </p>
+      </motion.div>
+
+      {/* Bottom loading bar */}
+      <motion.div
+        className="absolute bottom-0 left-0 h-[2px] origin-left"
+        style={{ width: "100%", backgroundColor: G.gold }}
+        initial={{ scaleX: 0 }}
+        animate={{ scaleX: phase === "out" ? 1 : phase === "hold" ? 0.8 : 0.6 }}
+        transition={{ duration: phase === "in" ? 0.8 : 0.4, ease: "easeOut" }}
+      />
+    </motion.div>
+  );
+}
+
 // ─── APP ──────────────────────────────────────────────────────────────────────
 
 export default function App() {
+  const [showSplash, setShowSplash] = useState(() => {
+    // Only show splash once per browser session
+    if (sessionStorage.getItem("pb_splash_shown")) return false;
+    sessionStorage.setItem("pb_splash_shown", "1");
+    return true;
+  });
+
   return (
-    <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
-      <Nav />
-      <Hero />
-      <About />
-      <MissionVision />
-      <Timeline />
-      <Stats />
-      <WhyUs />
-      <Safety />
-      <TrekCategories />
-      <FootstepsOfSwarajya />
-      <Gallery />
-      <Community />
-      <Team />
-      <Corporate />
-      <Testimonials />
-      <FAQ />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <AnimatePresence>
+        {showSplash && (
+          <SplashScreen onDone={() => setShowSplash(false)} />
+        )}
+      </AnimatePresence>
+      <div className="min-h-screen bg-background text-foreground overflow-x-hidden">
+        <Nav />
+        <Hero />
+        <About />
+        <MissionVision />
+        <Timeline />
+        <Stats />
+        <WhyUs />
+        <Safety />
+        <TrekCategories />
+        <FootstepsOfSwarajya />
+        <Gallery />
+        <Community />
+        <Team />
+        <Corporate />
+        <Testimonials />
+        <FAQ />
+        <Contact />
+        <Footer />
+      </div>
+    </>
   );
 }
