@@ -248,7 +248,14 @@ function Hero() {
   return (
     <section ref={ref} id="hero" className="relative min-h-screen flex items-center overflow-hidden">
       <motion.div className="absolute inset-0 scale-110" style={{ y: bgY }}>
-        <img src="https://images.unsplash.com/photo-1585889574476-af7bcb00d9c3?w=1920&h=1080&fit=crop&auto=format" alt="Raigad Fort green mountains under white clouds" className="w-full h-full object-cover object-right sm:object-center" loading="eager" decoding="async" fetchPriority="high" />
+        <img
+          src="https://images.unsplash.com/photo-1585889574476-af7bcb00d9c3?w=1920&h=1080&fit=crop&auto=format"
+          alt="Raigad Fort green mountains under white clouds"
+          className="w-full h-full object-cover [object-position:80%_center] sm:object-center"
+          loading="eager"
+          decoding="async"
+          fetchPriority="high"
+        />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to top, #08130b 0%, rgba(8,19,11,0.65) 40%, rgba(8,19,11,0.3) 100%)" }} />
         <div className="absolute inset-0" style={{ background: "linear-gradient(to right, rgba(8,19,11,0.7) 0%, transparent 60%)" }} />
       </motion.div>
@@ -269,16 +276,16 @@ function Hero() {
         <motion.h1 initial={{ opacity: 0, y: 60 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 1.1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
           className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-light leading-[0.95] mb-8 max-w-5xl"
           style={{ fontFamily: DISPLAY, color: G.cream }}>
-                Walk the Paths of<br />
-                <em style={{ color: G.gold }} className="not-italic italic">Legends</em>
-                <br />
-                Sahyadris.
+          Walk the Paths of<br />
+          <em style={{ color: G.gold }} className="not-italic italic">Legends</em>
+          <br />
+          Sahyadris.
         </motion.h1>
 
-              <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.75 }}
-                className="text-base md:text-lg leading-relaxed max-w-md mb-10" style={{ color: G.mist, fontFamily: BODY }}>
-                Explore the forts, valleys, and mountain trails that witnessed the rise of Swarajya — where history, culture, and adventure meet on every step.
-              </motion.p>
+        <motion.p initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.75 }}
+          className="text-base md:text-lg leading-relaxed max-w-md mb-10" style={{ color: G.mist, fontFamily: BODY }}>
+          Explore the forts, valleys, and mountain trails that witnessed the rise of Swarajya — where history, culture, and adventure meet on every step.
+        </motion.p>
 
         <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.9, delay: 0.95 }}
           className="flex flex-wrap gap-4">
@@ -1162,8 +1169,8 @@ function SplashScreen({ onDone }: { onDone: () => void }) {
           scale: phase === "in"
             ? { duration: 0.8, ease: [0.22, 1, 0.36, 1] }
             : phase === "hold"
-            ? { duration: 1.4, repeat: Infinity, ease: "easeInOut" }
-            : { duration: 0.5 },
+              ? { duration: 1.4, repeat: Infinity, ease: "easeInOut" }
+              : { duration: 0.5 },
           opacity: { duration: phase === "in" ? 0.5 : 0.6 },
         }}
       >
